@@ -1,13 +1,14 @@
 import './App.css';
-// import SubmitButton from './SubmitButtom.js';
+import SubmitButton from './SubmitButtom.js';
 import ActionForm from './Form.js';
-import Summary from './pages/Summary.js';
 import { Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Summary />
+      <header className="App-header">
+        <h2>Actionable Recourse</h2>
+      </header>
       <ActionForm />
         <br />
         <br />
