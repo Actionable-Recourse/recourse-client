@@ -6,10 +6,12 @@ import {
     Box, Container, Divider, Typography
 } from '@mui/material';
 import createUserInput from './InputData.js';
+import ActionLists from './ActionLists.js';
 
 let ActionForm = () => {
     const { setValue, getValues, register, handleSubmit, formState: { errors } } = useForm();
     const [predicted, setPredicted] = useState(-1);
+    const [actions, setActions] = useState([]);
 
     let clearAll = () => {
         for (let i = 0; i < document.getElementsByTagName("input").length; i++) {
@@ -30,8 +32,8 @@ let ActionForm = () => {
                 setPredicted(result.predicted);
                 // If credit denied, show a list of actions to revert the decision
                 if (!result.predicted) {
-                    const warning_text = "<p>Here are the things you can do to get accepted.</p>";
-                    document.getElementById('button_result_table').innerHTML = warning_text + result.recourse_actions;
+                    // Set recourse actions that can be taken
+                    setActions(result.recourse_actions);
                 } else {
                     document.getElementById('button_result_table').innerHTML = "";
                 }
@@ -358,7 +360,8 @@ let ActionForm = () => {
                         <div style={{ float: "left", width: "auto" }}>
 
                             <Typography variant="h4">Credit: {(predicted === -1) ? "" : (predicted) ? "Accepted" : "Denied"}</Typography>
-                            <div id='button_result_table'></div>
+                            <ActionLists actions={actions}/>
+                            {/* <div id='button_result_table'></div> */}
                         </div>
                     </Grid>
 
