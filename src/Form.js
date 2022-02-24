@@ -50,13 +50,17 @@ let ActionForm = () => {
 
     useEffect(() => { }, [])
 
-    const tableFieldStyle = { mx: 1, my: 0.5, height: 100 };
+    const tableFieldStyle = { mx: 1, my: 0.5, minHeight: 100, minHeight: 120  };
     const boundStyle = { '& .MuiTextField-root': { mx: 1.2, width: '8ch' }, }
 
     setValue("Actionable_bool", [-1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
 
     return (
-        <div>
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
             <Container maxWidth="xl" sx={{ mx: 10 }}>
                 <center>
                     <Box sx={{ my: 4, mx: 4 }}>
@@ -101,10 +105,10 @@ let ActionForm = () => {
                             <Box sx={tableFieldStyle}><FormControl ><p>Education Level: </p>
                                 <FormLabel id="education-radio-button"></FormLabel>
                                 <RadioGroup aria-labelledby="education-radio-button" defaultValue="3" row>
-                                    <FormControlLabel value="3" {...register("EducationLevel", { required: true })} control={<Radio />} label="high school" />
-                                    <FormControlLabel value="2" {...register("EducationLevel", { required: true })} control={<Radio />} label="university" />
-                                    <FormControlLabel value="1" {...register("EducationLevel", { required: true })} control={<Radio />} label="graduate school" />
-                                    <FormControlLabel value="0" {...register("EducationLevel", { required: true })} control={<Radio />} label="others" />
+                                    <FormControlLabel value="3" {...register("EducationLevel", { required: true })} control={<Radio />} label="High school" />
+                                    <FormControlLabel value="2" {...register("EducationLevel", { required: true })} control={<Radio />} label="Undergraduate" />
+                                    <FormControlLabel value="1" {...register("EducationLevel", { required: true })} control={<Radio />} label="Graduate" />
+                                    <FormControlLabel value="0" {...register("EducationLevel", { required: true })} control={<Radio />} label="Other" />
                                 </RadioGroup>
                             </FormControl></Box>
 
