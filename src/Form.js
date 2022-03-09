@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import {
     Button, TextField, FormControl, FormLabel,
     RadioGroup, FormControlLabel, Radio, Checkbox, Grid,
-    Box, Container, Divider, Typography
+    Box, Container, Divider, Typography,
+    InputLabel, Select, MenuItem
 } from '@mui/material';
 import createUserInput from './InputData.js';
 import ActionLists from './ActionLists.js';
@@ -25,7 +26,6 @@ let ActionForm = () => {
         console.log(user_input);
         const axios = require('axios');
         const data = createUserInput(user_input)
-        console.log(data)
         axios.post("https://recourse-api.herokuapp.com/predict", data)
             .then(res => res.data)
             .then((result) => {
@@ -50,19 +50,25 @@ let ActionForm = () => {
 
     useEffect(() => { }, [])
 
-    const tableFieldStyle = { mx: 1, my: 0.5, minHeight: 80, minHeight: 120 };
-    const tableFieldStyle2 = { mx: 1, my: 1.5, minHeight: 80, minHeight: 120 };
+    const tableFieldStyle = { mx: 1, my: 0.5, minHeight: 120 };
+    const tableFieldStyle2 = { mx: 1, my: 1.5, minHeight: 120 };
 
     const boundStyle = { '& .MuiTextField-root': { mx: 0.8, width: '8ch' }, }
     const centerized = { display: "flex", justifyContent: "center", alignItems: "center" }
-    const tableWidthStyle = { float: "left", width: "80%" };
+    const tableWidthStyle = { float: "left", width: "60%" };
     const actionableWidthStyle = { float: "left", width: "20%" };
+    const directionStyle = { float: "left", width: "20%" };
 
     setValue("Actionable_bool", [-1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    const directionList = ["MaxBillAmountOverLast6MonthsDirection", "MaxPaymentAmountOverLast6MonthsDirection",
+    "MonthsWithHighSpendingOverLast6MonthsDirection", "MonthsWithLowSpendingOverLast6MonthsDirection",
+    "MonthsWithZeroBalanceOverLast6MonthsDirection", "MostRecentBillAmountDirection",
+    "MostRecentPaymentAmountDirection", "TotalMonthsOverdueDirection", "TotalOverdueCountsDirection"];
+    directionList.map(x => setValue(x, "0"))
 
     return (
         <div style={centerized}>
-            <Container maxWidth="xl" sx={{ mx: 20 }}>
+            <Container maxWidth="xl" sx={{ mx: 15 }}>
                 <center>
                     <Box sx={{ my: 4, mx: 4 }}>
                         <Typography variant="h4">Credit Approval Prediction</Typography><br />
@@ -83,7 +89,7 @@ let ActionForm = () => {
                     </Box>
 
                     <Grid >
-                        <div style={{ float: "left", width: "45%" }}>
+                        <div style={{ float: "left", width: "55%" }}>
                             {/* 1. Age */}
                             <Box sx={tableFieldStyle}>
                                 <div style={tableWidthStyle} >
@@ -191,6 +197,16 @@ let ActionForm = () => {
                                             </div>
                                         </Box></Box>
                                 </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MaxBillAmountOverLast6MonthsDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Box>
 
                             {/* 6. max pay amount */}
@@ -214,6 +230,16 @@ let ActionForm = () => {
                                                     {...register("MaxPaymentAmountOverLast6MonthsUpperBound", { required: false, min: 0 })} />
                                             </div>
                                         </Box></Box>
+                                </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MaxPaymentAmountOverLast6MonthsDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </div>
                             </Box>
 
@@ -249,6 +275,16 @@ let ActionForm = () => {
                                             </div>
                                         </Box></Box>
                                 </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MonthsWithHighSpendingOverLast6MonthsDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Box>
 
                             {/* 8 MonthsWithLowSpendingOverLast6Months*/}
@@ -281,6 +317,16 @@ let ActionForm = () => {
                                                     {...register("MonthsWithLowSpendingOverLast6MonthsUpperBound", { required: false, min: 0, max: 6 })} />
                                             </div>
                                         </Box></Box>
+                                </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MonthsWithLowSpendingOverLast6MonthsDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </div>
                             </Box>
 
@@ -315,6 +361,16 @@ let ActionForm = () => {
                                             </div>
                                         </Box></Box>
                                 </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MonthsWithZeroBalanceOverLast6MonthsDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Box>
 
                             {/* 10. MostRecentBillAmount*/}
@@ -338,6 +394,16 @@ let ActionForm = () => {
                                             </div>
                                         </Box></Box>
                                 </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MostRecentBillAmountDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Box>
 
                             {/* 11. MostRecentPaymentAmount*/}
@@ -360,6 +426,16 @@ let ActionForm = () => {
                                                     {...register("MostRecentPaymentAmountUpperBound", { required: false, min: 0 })} />
                                             </div>
                                         </Box></Box>
+                                </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("MostRecentPaymentAmountDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </div>
                             </Box>
 
@@ -394,6 +470,16 @@ let ActionForm = () => {
                                             </div>
                                         </Box></Box>
                                 </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("TotalMonthsOverdueDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Box>
 
                             {/* 13. TotalOverdueCounts*/}
@@ -427,30 +513,40 @@ let ActionForm = () => {
                                             </div>
                                         </Box></Box>
                                 </div>
+                                <div style={directionStyle}>
+                                    <FormControl variant="standard" sx={{minWidth: 90}}>
+                                        <InputLabel>Direction</InputLabel>
+                                        <Select defaultValue={0} {...register("TotalOverdueCountsDirection")}>
+                                            <MenuItem value="-1">Decrease</MenuItem>
+                                            <MenuItem value="0">Any</MenuItem>
+                                            <MenuItem value="1">Increase</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Box>
                         </div>
 
-                        <div style={{ float: "left", width: "55%" }}>
-                            <Box sx={{ my: 2, mx: 8 }}>
+                        <div style={{ float: "left", width: "45%" }}>
+                            <Box sx={{ my: 2, mx: 2 }}>
                                 <Typography variant="h4">Credit: {(predicted === -1) ? "" : (predicted) ? "Accepted" : "Denied"}</Typography>
                                 <ActionLists actions={actions} />
                                 {/* <div id='button_result_table'></div> */}
                             </Box>
                         </div>
-                </Grid>
+                    </Grid>
 
-                <Grid container justifyContent="center">
-                    <Divider variant="middle" />
-                    <Button variant="outlined" onClick={() => { clearAll() }}>Clear All</Button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="contained" type="submit">Submit</Button>
-                </Grid>
-                <br />
-            </form>
+                    <Grid container justifyContent="center">
+                        <Divider variant="middle" />
+                        <Button variant="outlined" onClick={() => { clearAll() }}>Clear All</Button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button variant="contained" type="submit">Submit</Button>
+                    </Grid>
+                    <br />
+                </form>
 
 
 
-        </Container>
+            </Container>
 
         </div >
     );

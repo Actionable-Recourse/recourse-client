@@ -42,6 +42,17 @@ let createUserInput = (user_input) => {
             "MostRecentPaymentAmountUpperBound": user_input.MostRecentPaymentAmountUpperBound,
             "TotalMonthsOverdueUpperBound": user_input.TotalMonthsOverdueUpperBound,
             "TotalOverdueCountsUpperBound": user_input.TotalOverdueCountsUpperBound,
+
+            "MaxBillAmountOverLast6MonthsDirection": user_input.MaxBillAmountOverLast6MonthsDirection,
+            "MaxPaymentAmountOverLast6MonthsDirection": user_input.MaxPaymentAmountOverLast6MonthsDirection,
+            "MonthsWithHighSpendingOverLast6MonthsDirection": user_input.MonthsWithHighSpendingOverLast6MonthsDirection,
+            "MonthsWithLowSpendingOverLast6MonthsDirection": user_input.MonthsWithLowSpendingOverLast6MonthsDirection,
+            "MonthsWithZeroBalanceOverLast6MonthsDirection": user_input.MonthsWithZeroBalanceOverLast6MonthsDirection,
+            "MostRecentBillAmountDirection": user_input.MostRecentBillAmountDirection,
+            "MostRecentPaymentAmountDirection": user_input.MostRecentPaymentAmountDirection,
+            "TotalMonthsOverdueDirection": user_input.TotalMonthsOverdueDirection,
+            "TotalOverdueCountsDirection": user_input.TotalOverdueCountsDirection,
+
         }
     }
 }
