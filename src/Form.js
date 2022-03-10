@@ -73,8 +73,13 @@ let ActionForm = () => {
                     <Box sx={{ my: 4, mx: 4 }}>
                         <Typography variant="h4">Credit Approval Prediction</Typography><br />
                         <Typography variant="body1">
-                            Fill in the form below to see if you will be denied for credit or not. If you are denied,
-                            a list of actions that are required to get accepted will be shown below.
+                            Fill in the form below to see if you will be denied for credit or not. If you are denied, a list of actions that are required to get accepted will be shown below. 
+                            If so, you are able to click on the items on the possible action set output and 
+                                let the page automicatlly change your response.
+                            For the following questions, report the information over the past 6 months. 
+                            Put a check on the Actionable box if you are able to take actions to change the value for every question, 
+                                and you can specify the optional lower bounds, upper bounds, and directional constraints (increase or decrease). 
+                                
                         </Typography>
                     </Box></center>
                 <Divider variant="middle" />
